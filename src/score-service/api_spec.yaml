@@ -1,0 +1,89 @@
+openapi: 3.0.0
+
+info:
+  title: Numbr Guessr score service
+  version: 0.0.1
+
+paths:
+  /health_check:
+    get:
+      operationId: endpoints.health_check
+      summary: Perform a health check
+      responses:
+        '200':
+          description: Ok
+
+  /get_scores:
+    get:
+      operationId: endpoints.get_scores
+      summary: Get saved scores
+      parameters:
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scores:
+                    type: object
+
+  /save_score:
+    post:
+      operationId: endpoints.save_score
+      summary: Save a score
+      parameters:
+      - name: score
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: level
+        in: query
+        required: true
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 2
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  position:
+                    type: integer
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Error response according to draft
+                properties:
+                  status:
+                    description: "HTTP error code"
+                    type: integer
+                  title:
+                    description: "Error"
+                    type: string
+                  detail:
+                    description: "Detailed human readable error description"
+                    type: string
+                  type:
+                    description: "Problem type, ref to URI"
+                    type: string
+
