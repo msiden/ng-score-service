@@ -1,6 +1,8 @@
 
-def health_check() -> bool:
-    return True
+def health_check() -> dict:
+    return {
+        'status': 'ok'
+    }
 
 def get_scores(size: int = None, level: int = None) -> list:
     return [
