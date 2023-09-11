@@ -74,6 +74,12 @@ paths:
       operationId: endpoints.save_score
       summary: Save a score
       parameters:
+      - name: game_id
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
       - name: score
         in: query
         required: true
@@ -86,7 +92,7 @@ paths:
           type: integer
           minimum: 0
           maximum: 2
-      - name: name
+      - name: user_name
         in: query
         required: true
         schema:

@@ -11,4 +11,4 @@ run-local: build-local
 	docker run -ti -p 8081:8081 ng-score-service
 
 run-test: build-test
-	docker run -ti ng-score-service-test bash
+	docker run -ti ng-score-service-test

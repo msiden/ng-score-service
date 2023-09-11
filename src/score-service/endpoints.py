@@ -1,3 +1,5 @@
+import db
+
 
 def health_check() -> dict:
     return {
@@ -16,7 +18,8 @@ def get_position(score: int, level: int) -> dict:
         'position': 3
     }
 
-def save_score(score: int, level: int, name: str) -> dict:
+def save_score(game_id: str, score: int, level: int, user_name: str) -> dict:
+    db.insert_data(game_id, score, level, user_name)
     return {
         'position': 30
     }

@@ -25,42 +25,35 @@ class Scores(Base):
         return f"id:{self.id!r}, user_name:{self.user_name!r}, score:{self.score!r}, level:{self.level!r}"
 
 
-# Create database
 def create_all():
     Base.metadata.create_all(engine)
 
 
-# Write data to DB
-def insert_data():
+def insert_data(id: str, score: int, level: int, user_name: str) -> int:
     with Session(engine) as session:
-        spongebob = Scores(
-            id="1",
-            user_name="spongebob",
-            score=1000,
-            level=0
-        )
-        sandy = Scores(
-            id="2",
-            user_name="sandy",
-            score=1200,
-            level=0
+
+        new_score = Scores(
+            id=id,
+            score=score,
+            level=level,
+            user_name=user_name
         )
 
-        session.add_all([spongebob, sandy])
+        session.add(new_score)
         session.commit()
 
 
 def get_data():
     session = Session(engine)
 
-    stmt = select(Scores).where(Scores.user_name.in_(["spongebob", "sandy"]))
+    stmt = select(Scores)
 
-    for user in session.scalars(stmt):
-        print(user)
+    # for user in session.scalars(stmt):
+    #     print(user)
+    return session.scalars(stmt)
 
 
 if __name__ == "__main__":
     create_all()
-    insert_data()
+    insert_data('abc123', 3000, 1, 'Player1')
     get_data()
-
