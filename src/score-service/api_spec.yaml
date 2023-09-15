@@ -18,7 +18,7 @@ paths:
       operationId: endpoints.get_scores
       summary: Get saved scores
       parameters:
-      - name: size
+      - name: chunk_size
         in: query
         required: false
         schema:

@@ -50,10 +50,10 @@ def get_data():
 
     # for user in session.scalars(stmt):
     #     print(user)
-    return session.scalars(stmt)
+    return [x for x in session.scalars(stmt)]
 
 
-if __name__ == "__main__":
-    create_all()
-    insert_data('abc123', 3000, 1, 'Player1')
-    get_data()
+
+create_all()
+# insert_data('abc123', 3000, 1, 'Player1')
+# get_data()

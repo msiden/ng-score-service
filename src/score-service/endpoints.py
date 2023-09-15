@@ -6,7 +6,8 @@ def health_check() -> dict:
         'status': 'ok'
     }
 
-def get_scores(size: int = None, level: int = None) -> list:
+def get_scores(chunk_size: int = None, level: int = None) -> list:
+    print(db.get_data())
     return [
         {'name': 'player1', 'score': 14000, 'level': 0},
         {'name': 'player2', 'score': 4000, 'level': 1},
