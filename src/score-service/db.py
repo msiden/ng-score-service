@@ -44,15 +44,16 @@ def insert_data(id: str, score: int, level: int, user_name: str) -> int:
 
 
 def get_data():
-    session = Session(engine)
+    # session = Session(engine)
 
-    stmt = select(Scores)
+    # stmt = select(Scores)
 
     # for user in session.scalars(stmt):
     #     print(user)
-    return [x for x in session.scalars(stmt)]
-
-
+    # return [x for x in session.scalars(stmt)]
+    with Session(engine) as session:
+        statement = select(Scores)
+        return session.scalars(statement).all()
 
 create_all()
 # insert_data('abc123', 3000, 1, 'Player1')
