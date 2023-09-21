@@ -2,4 +2,5 @@ connexion[swagger-ui]
 flask_cors
 gunicorn
 SQLAlchemy
+marshmallow-sqlalchemy
 pytest
