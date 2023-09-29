@@ -30,6 +30,7 @@ class ScoresSchema(SQLAlchemySchema):
     class Meta:
         model = Scores
         load_instance = True  # Optional: deserialize to model instances
+        fields = ("id", "user_name")
 
     id = auto_field()
     user_name = auto_field()
@@ -60,11 +61,28 @@ def get_data():
 
     statement = select(Scores)
 
-    for user in session.execute(statement):
-        print('>', user._mapping, type(user._mapping))
-        print('>>', user.id, type(user.id))
+    # scores = Scores(id="3ef42114-a2c6-41e4-960b-1256c54c0800")
+    scores_schema = ScoresSchema(many=True)
+    # session.add(scores)
+    # session.commit()
 
-    return [score for score in session.execute(statement)]
+    # dump_data = scores_schema.dump(scores)
+    # print('>', dump_data)
+
+    # load_data = scores_schema.load(session.execute(statement), session=session)
+    # print(load_data)
+
+
+    # return [score for score in session.execute(statement)]
+
+    result = session.execute(statement)
+    # print('result', result)
+    # load_data = scores_schema.dump(result)
+    # print('>', load_data)
+
+    for r in result:
+        load_data = scores_schema.dump(r)
+        print('>>>', load_data, type(load_data), type(load_data[0]))
 
     # with Session(engine) as session:
     #     statement = select(Scores)
