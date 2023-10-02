@@ -29,8 +29,7 @@ class Scores(Base):
 class ScoresSchema(SQLAlchemySchema):
     class Meta:
         model = Scores
-        load_instance = True  # Optional: deserialize to model instances
-        fields = ("id", "user_name")
+        load_instance = True
 
     id = auto_field()
     user_name = auto_field()
@@ -56,40 +55,22 @@ def insert_data(id: str, score: int, level: int, user_name: str) -> int:
         session.commit()
 
 
-def get_data():
-    session = Session(engine)
-
-    statement = select(Scores)
-
-    # scores = Scores(id="3ef42114-a2c6-41e4-960b-1256c54c0800")
+def get_data(chunk_size, level):
     scores_schema = ScoresSchema(many=True)
-    # session.add(scores)
-    # session.commit()
 
-    # dump_data = scores_schema.dump(scores)
-    # print('>', dump_data)
+    with Session(engine) as session:
+        statement = select(Scores).where(Scores.level == level).order_by(Scores.score.desc()).limit(chunk_size)
+        result = session.scalars(statement).all()
+        return scores_schema.dump(result)
 
-    # load_data = scores_schema.load(session.execute(statement), session=session)
-    # print(load_data)
-
-
-    # return [score for score in session.execute(statement)]
-
-    result = session.execute(statement)
-    # print('result', result)
-    # load_data = scores_schema.dump(result)
-    # print('>', load_data)
-
-    for r in result:
-        load_data = scores_schema.dump(r)
-        print('>>>', load_data, type(load_data), type(load_data[0]))
-
-    # with Session(engine) as session:
-    #     statement = select(Scores)
-    #     return session.scalars(statement).all()
 
 create_all()
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0800', '12000', 1, 'Player1')
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0801', '12001', 1, 'Player2')
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0802', '12002', 1, 'Player3')
-# get_data()
+insert_data('3ef42114-a2c6-41e4-960b-1256c54c0800', '1000', 1, 'Player1')
+insert_data('3ef42114-a2c6-41e4-960b-1256c54c0801', '14011', 1, 'Player2')
+insert_data('3ef42114-a2c6-41e4-960b-1256c54c0802', '12022', 1, 'Player3')
+insert_data('3ef42114-a2c6-41e4-960b-1256c54c0803', '11003', 0, 'Player4')
+insert_data('3ef42114-a2c6-41e4-960b-1256c54c0804', '17004', 1, 'Player5')
+insert_data('3ef42114-a2c6-41e4-960b-1256c54c0805', '12015', 1, 'Player6')
+insert_data('3ef42114-a2c6-41e4-960b-1256c54c0806', '12006', 0, 'Player7')
+insert_data('3ef42114-a2c6-41e4-960b-1256c54c0807', '10000', 2, 'Player8')
+insert_data('3ef42114-a2c6-41e4-960b-1256c54c0808', '12018', 2, 'Player9')
