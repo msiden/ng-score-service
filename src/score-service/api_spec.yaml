@@ -41,34 +41,6 @@ paths:
                   scores:
                     type: object
 
-  /get_position:
-    get:
-      operationId: endpoints.get_position
-      summary: Get the position of a score
-      parameters:
-      - name: score
-        in: query
-        required: true
-        schema:
-          type: integer
-      - name: level
-        in: query
-        required: true
-        schema:
-          type: integer
-          minimum: 0
-          maximum: 2
-      responses:
-        '200':
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  position:
-                    type: integer
-
   /save_score:
     post:
       operationId: endpoints.save_score
@@ -100,13 +72,6 @@ paths:
       responses:
         '200':
           description: Ok
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  position:
-                    type: integer
         '500':
           description: Error
           content:

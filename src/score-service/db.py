@@ -55,7 +55,7 @@ def insert_data(id: str, score: int, level: int, user_name: str) -> int:
         session.commit()
 
 
-def get_data(chunk_size, level):
+def get_data(chunk_size: int, level: int) -> dict:
     scores_schema = ScoresSchema(many=True)
 
     with Session(engine) as session:
