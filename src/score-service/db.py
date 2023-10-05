@@ -8,7 +8,7 @@ from sqlalchemy import select
 from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
 
 
-engine = create_engine("sqlite://", echo=True)
+engine = create_engine("sqlite:///../../database.db", echo=True)
 
 
 class Base(DeclarativeBase):
@@ -65,12 +65,3 @@ def get_data(chunk_size: int, level: int) -> dict:
 
 
 create_all()
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0800', '1000', 1, 'Player1')
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0801', '14011', 1, 'Player2')
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0802', '12022', 1, 'Player3')
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0803', '11003', 0, 'Player4')
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0804', '17004', 1, 'Player5')
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0805', '12015', 1, 'Player6')
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0806', '12006', 0, 'Player7')
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0807', '10000', 2, 'Player8')
-insert_data('3ef42114-a2c6-41e4-960b-1256c54c0808', '12018', 2, 'Player9')
