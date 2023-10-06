@@ -9,7 +9,7 @@ from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
 
 
 # engine = create_engine("sqlite:///../../database.db", echo=True)
-engine = create_engine("postgresql+psycopg2://scott:tiger@localhost:5432/mydatabase", echo=True)
+engine = create_engine("postgresql+psycopg2://postgres:abc123@localhost:5432/scores", echo=True)
 
 
 class Base(DeclarativeBase):
