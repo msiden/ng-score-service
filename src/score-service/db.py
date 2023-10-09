@@ -5,11 +5,11 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy import select
+from sqlalchemy.exc import OperationalError
 from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
 
 
-# engine = create_engine("sqlite:///../../database.db", echo=True)
-engine = create_engine("postgresql+psycopg2://postgres:abc123@localhost:5432/scores", echo=True)
+engine = create_engine("postgresql+psycopg2://postgres:abc123@localhost:5432/scores")
 
 
 class Base(DeclarativeBase):
@@ -39,7 +39,10 @@ class ScoresSchema(SQLAlchemySchema):
 
 
 def create_all():
-    Base.metadata.create_all(engine)
+    try:
+        Base.metadata.create_all(engine)
+    except OperationalError:
+        print("DB connection failed")
 
 
 def insert_data(id: str, score: int, level: int, user_name: str) -> int:

@@ -3,4 +3,4 @@ flask_cors
 gunicorn
 SQLAlchemy
 marshmallow-sqlalchemy
-psycopg2
+psycopg2-binary
