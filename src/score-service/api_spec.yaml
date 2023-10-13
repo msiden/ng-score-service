@@ -5,9 +5,9 @@ info:
   version: 0.0.1
 
 paths:
-  /health_check:
+  /scores_service_status:
     get:
-      operationId: endpoints.health_check
+      operationId: endpoints.scores_service_status
       summary: Perform a health check
       responses:
         '200':

@@ -9,7 +9,10 @@ from sqlalchemy.exc import OperationalError
 from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
 
 
-engine = create_engine("postgresql+psycopg2://postgres:abc123@localhost:5432/scores")
+PROD_CONFIG = "postgresql+psycopg2://postgres:QOvqBSjTMZSOO2qlD2Ed@scores-1.cipoqymlxtfh.eu-north-1.rds.amazonaws.com/scores"
+DEV_CONFIG = "postgresql+psycopg2://postgres:abc123@localhost:5432/scores"
+
+engine = create_engine(PROD_CONFIG)
 
 
 class Base(DeclarativeBase):

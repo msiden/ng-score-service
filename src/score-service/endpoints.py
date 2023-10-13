@@ -1,7 +1,7 @@
 import db
 
 
-def health_check() -> dict:
+def scores_service_status() -> dict:
     return {
         'status': 'ok'
     }
