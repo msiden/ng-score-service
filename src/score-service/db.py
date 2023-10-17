@@ -7,12 +7,16 @@ from sqlalchemy.orm import Session
 from sqlalchemy import select
 from sqlalchemy.exc import OperationalError
 from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
+import os
 
 
-PROD_CONFIG = "postgresql+psycopg2://postgres:QOvqBSjTMZSOO2qlD2Ed@scores-1.cipoqymlxtfh.eu-north-1.rds.amazonaws.com/scores"
-DEV_CONFIG = "postgresql+psycopg2://postgres:abc123@localhost:5432/scores"
+ENVIRONMENT = os.getenv("NGDB_ENV")
+IS_PROD = ENVIRONMENT == "prod"
+PASSWORD = os.getenv("NGDB_PASSWORD") if IS_PROD else "abc123"
+URL = os.getenv("NGDB_URL") if IS_PROD else "localhost"
+DB_CONFIG = f"postgresql+psycopg2://postgres:{PASSWORD}@{URL}:5432/scores"
 
-engine = create_engine(PROD_CONFIG)
+engine = create_engine(DB_CONFIG)
 
 
 class Base(DeclarativeBase):
